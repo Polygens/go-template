@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: docker.pkg.github.com/polygens/{{projectName}}/{{projectName}}
+  pullPolicy: IfNotPresent
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+  hosts:
+    - paths:
+        - /{{projectName}}
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 32Mi
+  requests:
+    cpu: 10m
+    memory: 16Mi
