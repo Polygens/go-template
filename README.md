@@ -1,3 +1,8 @@
-# {{projectName}}
+# Go Project Template
 
-![Build Go](https://github.com/Polygens/{{projectName}}/workflows/Build%20Go/badge.svg)
+
+## TODO
+
+Automate Python install???
+Hot reload code
+Debug in k8s

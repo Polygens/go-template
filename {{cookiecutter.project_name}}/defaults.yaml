@@ -1,0 +1,16 @@
+logLevel: info
+httpPort: 8080
+{% if cookiecutter.kafka|lower != "no" -%}
+kafka:
+  version: 2.4.1
+  brokers: kafka:9092
+  clientID: {{cookiecutter.project_name}}
+  {% if cookiecutter.kafka|lower != ["consumer", "both"] -%}
+  inputTopics:
+    # myInputTopic: example
+  {% endif -%}
+  {% if cookiecutter.kafka|lower != ["producer", "both"] -%}
+  outputTopic:
+    # myOutputTopic: example
+  {% endif -%}
+{%- endif %}

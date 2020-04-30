@@ -1,0 +1,43 @@
+replicaCount: 1
+fullnameOverride: ""
+nameOverride: ""
+namespace: ""
+
+image:
+  repository: docker.pkg.github.com/polygens/{{cookiecutter.project_name}}/{{cookiecutter.project_name}}
+  pullPolicy: IfNotPresent
+  pullSecrets: ""
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+  hosts:
+    - paths:
+        - /{{cookiecutter.project_name}}
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 32Mi
+  requests:
+    cpu: 10m
+    memory: 16Mi
+
+configmap: {}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: {{cookiecutter.project_name}}
+description: The {{cookiecutter.project_name}} chart for Kubernetes. {{cookiecutter.project_short_description}}
+type: application
+version: 0.0.0
+appVersion: 0.0.0

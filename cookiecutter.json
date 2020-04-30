@@ -1,0 +1,22 @@
+{
+  "project_name": "mygolangproject",
+  "project_short_description": "A Golang project.",
+  "kafka": [
+    "no",
+    "consumer",
+    "producer",
+    "both"
+  ],
+  "postgress": [
+    "no",
+    "yes"
+  ],
+  "create_github_repository": [
+    "yes",
+    "no"
+  ],
+  "_copy_without_render": [
+    "charts/templates",
+    ".github"
+  ]
+}

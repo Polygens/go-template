@@ -1,0 +1,20 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    name: Build and release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set env variables
+        run: |
+          echo "::set-env name=user::$(echo ${{ github.repository }} | cut -d/ -f1)"; \
+          echo "::set-env name=lowercase_user::$(echo ${{ github.repository }} | cut -d/ -f1 | tr '[:upper:]' '[:lower:]')"; \
+          echo "::set-env name=project::$(echo ${{ github.repository }} | cut -d/ -f2 | tr '[:upper:]' '[:lower:]')"
+      - name: Build the Docker image
+        run: DOCKER_BUILDKIT=1 docker build --target=prod -t docker.pkg.github.com/$lowercase_user/$project/$project:latest -t docker.pkg.github.com/$lowercase_user/$project/$project:${{ steps.release.outputs.version }} --build-arg VERSION=${{ steps.release.outputs.version }} --build-arg APP=$project .

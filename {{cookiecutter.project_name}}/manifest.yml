@@ -1,0 +1,32 @@
+features:
+  - name: kafka
+    param: "{{cookiecutter.kafka|lower}}"
+    allowed: 
+      - "consumer"
+      - "producer"
+      - "both"
+    resources:
+    - service/kafka
+
+  - name: kafka consumers
+    param: "{{cookiecutter.kafka|lower}}"
+    allowed: 
+      - "consumer"
+      - "both"
+    resources:
+    - service/kafka/consumer
+
+  - name: kafka producers
+    param: "{{cookiecutter.kafka|lower}}"
+    allowed: 
+      - "producer"
+      - "both"
+    resources:
+    - service/kafka/producer
+
+  - name: postgress
+    param: "{{cookiecutter.postgress|lower}}"
+    allowed: 
+      - "yes"
+    resources: 
+      - service/postgress
